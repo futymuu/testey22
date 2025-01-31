@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kuis Pengetahuan - Platform Kuis untuk Meningkatkan Pengetahuan Anda">
+    <meta name="keywords" content="Kuis, Pengetahuan, Edukasi, Login, Daftar">
+    <title>Halaman Beranda Kuis</title>
+    <link rel="stylesheet" href="brd.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- Bagian Kiri: Logo dan Profil -->
+        <div class="header-left">
+            <div id="profileCircle" class="profile-circle logged-out"></div> <!-- Profil -->
+            <div class="logo">
+                <h1>Kuis Pengetahuan</h1>
+            </div>
+        </div>
+    
+        <!-- Bagian Kanan: Navigasi dan Tombol -->
+        <div class="header-right">
+            <div class="toggle-mode">
+                <input type="checkbox" id="modeToggle" class="mode-toggle-input">
+                <label for="modeToggle" class="mode-toggle-label">
+                    <span class="toggle-thumb"></span>
+                </label>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">☰</button>
+                <div class="dropdown-content">
+                    <a href="file://aua/0/BBU1/brd4.htm">Home</a>
+                    <a href="file://aua/0/BBU1/brd-gadgedin.htm">Gadgedin</a>
+                    <a href="#">Channels</a>
+                    <a href="#">Subscribe</a>
+                    <a href="#">About</a>
+                </div>
+            </div>
+            <!-- Tombol Login, Daftar, dan Logout -->
+            <button class="btn" id="loginBtn">Login</button>
+            <button class="btn" id="registerBtn">Daftar</button>
+            <button id="logoutBtn" class="btn" style="display:none;">Logout</button>
+        </div>
+    </header>
+    
+    <!-- Main Content Section -->
+    <section id="home" class="content">
+        <h2>Konten Kuis</h2>
+        <ul id="content-list" class="content-list">
+            <!-- Card akan dimuat di sini oleh JavaScript -->
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Kuis Pengetahuan. Semua hak dilindungi.</p>
+    </footer>
+
+    <!-- Overlay untuk Login -->
+    <div id="loginOverlay" class="overlay">
+        <div class="overlay-content">
+            <span class="close-btn" id="closeLoginBtn">&times;</span>
+            <h3>Login</h3>
+            <form id="loginForm">
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" name="username" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay untuk Daftar -->
+    <div id="registerOverlay" class="overlay">
+        <div class="overlay-content">
+            <span class="close-btn" id="closeRegisterBtn">&times;</span>
+            <h3>Daftar</h3>
+            <form id="registerForm">
+                <label for="registerUsername">Username:</label>
+                <input type="text" id="registerUsername" name="username" required>
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" name="email" required>
+                <label for="registerPassword">Password:</label>
+                <input type="password" id="registerPassword" name="password" required>
+                <button type="submit">Daftar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Memuat JavaScript Terpisah -->
+    <script src="brd.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>
