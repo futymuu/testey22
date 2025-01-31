@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Pilihan Ganda</title>
+    <link rel="stylesheet" href="sal1.css">
+</head>
+<body>
+    <!-- Overlay sebelum memulai -->
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <h2>Selamat datang di Quiz!</h2>
+            <p>Apakah Anda siap untuk memulai?</p>
+            <button id="start-btn" onclick="startQuiz()">Mulai</button>
+        </div>
+    </div>
+
+
+    <!-- Header untuk judul dan timer -->
+    <header class="header">
+        <div class="logo-container">
+            <h1>Quiz Pilihan Ganda</h1>
+        </div>
+        <div class="timer-container">
+            <div id="timer" class="timer">00:00</div>
+            <!-- Nomor soal di samping timer -->
+            <div id="question-number-container" class="question-number-container">
+                <span id="question-number" class="question-number">Soal 1</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="quiz-container">
+        <div id="question-container">
+            <p id="question-text">Loading question...</p>
+            <div id="options">
+                <!-- Options will be dynamically injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay untuk menampilkan hasil -->
+  <!-- Overlay untuk menampilkan hasil -->
+<div id="result-overlay" class="overlay hidden">
+    <div class="overlay-content">
+        <h2>Hasil Kuis</h2>
+        <p><strong>Benar:</strong> <span id="correct-count"></span></p>
+        <p><strong>Salah:</strong> <span id="incorrect-count"></span></p>
+        <p><strong>Waktu yang dibutuhkan:</strong> <span id="time-taken"></span> detik</p>
+        
+        <div class="result-buttons">
+            <a href="index.html" id="home-link" class="result-button home-link">Ke Beranda</a>
+            <button onclick="showIncorrectAnswers()" class="result-button review-button">Lihat Soal yang Salah</button>
+        </div>
+    </div>
+</div>
+
+    <!-- Overlay untuk melihat soal yang salah -->
+    <div id="incorrect-overlay" class="overlay hidden">
+        <div class="overlay-content">
+            <h2>Soal yang Salah</h2>
+            <div id="incorrect-questions"></div>
+            <button onclick="closeIncorrectAnswers()">Tutup</button>
+        </div>
+    </div>
+
+    <script src="sal.js"></script>
+</body>
+</html>
