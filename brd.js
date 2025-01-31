@@ -5,9 +5,9 @@ const contentData = [
         // Level 1-5: Pertanyaan untuk tingkat dasar
         {
             imgSrc: 'level1.jpg',
-            title: 'Level 1: Matematika',
-            subject: 'Apa itu penjumlahan? Hitung 2 + 3.',
-            link: 'level1.html'
+            title: 'Pertanyaan Umum',
+            subject: 'UMUM.',
+            link: 'sal.htm'
         },
         {
             imgSrc: 'level1.jpg',
