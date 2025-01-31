@@ -1,0 +1,659 @@
+/* Reset untuk menghindari margin dan padding yang tidak diinginkan */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    padding-top: 80px; /* Memberikan ruang agar konten tidak tertutup oleh header */
+    transition: background-color 0.3s ease;
+}
+
+/* Header */
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #6200ea;
+    color: white;
+    display: flex;
+    justify-content: space-between; /* Mengatur jarak antara kiri dan kanan */
+    align-items: center;
+    padding: 15px 30px;
+    z-index: 1000;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Bagian Kiri */
+.header-left {
+    display: flex;
+    align-items: center; /* Menjaga logo dan profil berada di tengah */
+}
+
+/* Logo */
+.header-left .logo h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+    margin-left: 15px; /* Jarak antara profil dan logo */
+}
+
+/* Bagian Kanan */
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Menu Navigasi */
+.header-right .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.header-right .dropbtn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.header-right .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.header-right .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.header-right .dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.header-right .dropdown:hover .dropdown-content {
+    display: block;
+}
+/* Tombol */
+/* Tombol Utama (Login, Daftar) */
+.header .btn {
+    background: linear-gradient(145deg, #6200ea, #3700b3); /* Gradasi tombol */
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    cursor: pointer;
+    margin-left: 20px;
+    border-radius: 12px; /* Sudut yang lebih membulat */
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); /* Efek bayangan yang lebih besar */
+    transition: all 0.4s ease-in-out; /* Transisi lebih smooth */
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase; /* Membuat huruf kapital */
+}
+
+/* Efek Hover untuk Tombol Utama */
+.header .btn:hover {
+    background: linear-gradient(145deg, #3700b3, #6200ea); /* Gradasi dibalik saat hover */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* Bayangan lebih dalam */
+    transform: translateY(-6px); /* Efek tombol terangkat lebih tinggi */
+}
+
+/* Efek Neon Glow untuk Tombol Utama */
+.header .btn:hover::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: glowing 1.5s infinite; /* Animasi glowing */
+    transform: translate(-50%, -50%);
+}
+
+/* Animasi Neon Glowing */
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Tombol Logout */
+#logoutBtn {
+    background-color: #ff5722; /* Oranye terang */
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    cursor: pointer;
+    margin-left: 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    display: none; /* Sembunyikan tombol logout pada awalnya */
+}
+
+/* Efek Hover untuk Tombol Logout */
+#logoutBtn:hover {
+    background-color: #e64a19; /* Oranye lebih gelap */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transform: translateY(-6px); /* Efek tombol terangkat lebih tinggi */
+}
+
+/* Efek Neon Glow untuk Tombol Logout */
+#logoutBtn:hover::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: glowing 1.5s infinite; /* Animasi glowing */
+    transform: translate(-50%, -50%);
+}
+
+#logoutBtn:active {
+    background-color: #e64a19;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(2px); /* Efek tombol menekan */
+}
+
+
+/* Lingkaran Profil */
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    border: 2px solid #6200ea;
+    position: relative;
+}
+
+.profile-circle.logged-in {
+    background-color: #4CAF50; /* Hijau ketika login */
+}
+
+.content-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Membuat grid responsif */
+    gap: 20px;
+    padding: 20px;
+    list-style-type: none;
+}
+
+/* Styling untuk kartu konten */
+.content-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 2px solid #ddd;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-body h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    font-size: 14px;
+    color: #666;
+}
+
+.card-body h3, .card-body p {
+    transition: color 0.3s ease;
+}
+
+.card:hover .card-body h3, .card:hover .card-body p {
+    color: #007BFF; /* Warna biru untuk teks saat hover */
+}
+/* Styling gambar dalam kartu */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 3px solid #f4f4f4;
+}
+
+/* Styling body kartu */
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-body h3 {
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Styling link kartu */
+.card-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-link:hover {
+    text-decoration: none;
+}
+
+/* Responsif Design untuk content-list */
+@media (max-width: 768px) {
+    .content-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grid lebih rapat di layar kecil */
+    }
+}
+
+@media (max-width: 480px) {
+    .content-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Menyesuaikan untuk ponsel */
+    }
+}
+
+/* Overlay Styling */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none; /* Awalnya tidak terlihat */
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+.overlay-content {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: scaleIn 0.3s ease-out;
+}
+
+.overlay h3 {
+    margin-bottom: 20px;
+}
+
+.overlay input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.overlay button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #6200ea;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.overlay button:hover {
+    background-color: #3700b3;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #6200ea;
+}
+
+.close-btn:hover {
+    color: #3700b3;
+}
+
+/* Animasi untuk overlay */
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* Styling untuk tombol geser */
+.toggle-mode {
+    position: relative;
+}
+
+.mode-toggle-input {
+    display: none;
+}
+
+.mode-toggle-label {
+    display: flex;
+    align-items: center;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mode-toggle-label .toggle-thumb {
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+}
+
+/* Geser ke kanan (aktifkan mode gelap) */
+.mode-toggle-input:checked + .mode-toggle-label {
+    background-color: #776f6f;
+}
+
+.mode-toggle-input:checked + .mode-toggle-label .toggle-thumb {
+    transform: translateX(30px);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #f4f4f4;
+}
+
+.content-list.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #f4f4f4;
+    border-color: #444;
+}
+
+.card.dark-mode {
+    background-color: #333;
+    color: #f4f4f4;
+}
+
+.card.dark-mode .card-body h3,
+.card.dark-mode .card-body p {
+    color: #f4f4f4;
+}
+
+.card.dark-mode:hover {
+    background-color: #444;
+}
+
+.card.dark-mode .card-body h3,
+.card.dark-mode .card-body p {
+    color: #f4f4f4;
+}
+
+.card.dark-mode:hover .card-body h3,
+.card.dark-mode:hover .card-body p {
+    color: #007BFF;
+}
+
+/* Dark mode untuk header */
+.header.dark-mode {
+    background-color: #333;
+}
+
+.header.dark-mode .logo h1 {
+    color: #f4f4f4;
+}
+
+.header.dark-mode .profile-circle {
+    background-color: #fff;
+}
+
+/* Responsif untuk tablet dan perangkat kecil */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .header {
+        padding: 10px 20px; /* Padding header lebih kecil */
+    }
+
+    .header-left .logo h1 {
+        font-size: 20px; /* Ukuran logo lebih kecil */
+    }
+
+    /* Ukuran tombol di header lebih kecil */
+    .header .btn {
+        font-size: 14px; /* Memperkecil ukuran font tombol */
+        padding: 8px 16px; /* Memperkecil padding tombol */
+    }
+
+    .header-left .logo h1 {
+        margin-left: 15px; /* Menjaga jarak antara logo dan profil */
+    }
+
+    .header-right .dropdown .dropbtn {
+        font-size: 14px; /* Ukuran tombol dropdown lebih kecil */
+    }
+
+    .header-right .dropdown-content a {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .header-right .dropdown {
+        margin-left: 10px;
+    }
+
+    .toggle-mode {
+        margin-left: 15px;
+    }
+
+    /* Menyesuaikan tombol login dan daftar untuk tablet */
+    .header .btn {
+        font-size: 14px; /* Memperkecil ukuran font */
+        padding: 8px 16px;
+    }
+
+    /* Menyesuaikan tombol logout untuk tablet */
+    #logoutBtn {
+        font-size: 14px; /* Ukuran font tombol logout lebih kecil */
+        padding: 8px 16px; /* Memperkecil padding tombol logout */
+    }
+}
+
+/* Untuk Ponsel (max-width: 768px) */
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 15px; /* Padding header lebih kecil */
+        flex-direction: row; /* Tetap di satu baris */
+        align-items: center; /* Semua elemen header tetap rata tengah secara horizontal */
+        justify-content: space-between; /* Memastikan logo dan tombol berada di sisi kiri dan kanan */
+    }
+
+    .header-left .logo h1 {
+        font-size: 18px; /* Ukuran logo lebih kecil */
+    }
+
+    /* Mengatur tombol menjadi lebih kecil dan rapat */
+    .header .btn {
+        font-size: 12px;
+        padding: 6px 12px; /* Memperkecil ukuran tombol */
+        margin-left: 10px; /* Menambahkan sedikit jarak antara tombol */
+    }
+
+    /* Dropdown button tetap ada, hanya diperkecil */
+    .header-right .dropdown .dropbtn {
+        font-size: 16px; /* Ukuran dropdown lebih kecil */
+    }
+
+    .header-right .dropdown-content a {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .toggle-mode {
+        margin-left: 10px;
+    }
+
+    /* Memperkecil ukuran toggle-mode */
+    .mode-toggle-label {
+        width: 40px; /* Lebih kecil */
+        height: 20px; /* Lebih kecil */
+    }
+
+    .mode-toggle-label .toggle-thumb {
+        width: 18px; /* Lebih kecil */
+        height: 18px; /* Lebih kecil */
+    }
+    
+    .mode-toggle-input:checked + .mode-toggle-label .toggle-thumb {
+        transform: translateX(20px);
+    }
+    /* Menyesuaikan tombol logout untuk ponsel */
+    #logoutBtn {
+        font-size: 12px; /* Ukuran font tombol logout lebih kecil */
+        padding: 6px 12px; /* Memperkecil padding tombol logout */
+    }
+}
+
+/* Untuk Ponsel lebih kecil (max-width: 480px) */
+@media (max-width: 480px) {
+    .header-left .logo h1 {
+        font-size: 16px; /* Ukuran logo lebih kecil */
+    }
+
+    .header {
+        padding: 10px 10px;
+        flex-direction: row; /* Tetap horizontal */
+        align-items: center;
+        justify-content: space-between; /* Memastikan tombol tetap berada di kiri dan kanan */
+    }
+
+    /* Memperkecil ukuran tombol lebih lanjut di ponsel */
+    .header .btn {
+        font-size: 7px;
+        padding: 6px 12px; /* Lebih kecil padding */
+        margin-left: 10px; /* Menambahkan sedikit jarak antar tombol */
+    }
+
+    /* Menyusun dropdown dengan jarak yang lebih kompak */
+    .header-right .dropdown .dropbtn {
+        font-size: 14px; /* Ukuran dropdown lebih kecil */
+    }
+
+    .header-right .dropdown-content a {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .toggle-mode {
+        margin-left: 10px;
+    }
+
+    /* Memperkecil ukuran toggle-mode */
+    .mode-toggle-label {
+        width: 35px; /* Lebih kecil */
+        height: 18px; /* Lebih kecil */
+    }
+
+    .mode-toggle-label .toggle-thumb {
+        width: 15px; /* Lebih kecil */
+        height: 15px; /* Lebih kecil */
+    }
+    /* Menyesuaikan tombol logout untuk ponsel */
+    #logoutBtn {
+        font-size: 12px; /* Ukuran font tombol logout lebih kecil */
+        padding: 6px 12px; /* Memperkecil padding tombol logout */
+    }
+}
