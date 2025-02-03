@@ -10,122 +10,260 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
     color: #333;
-    padding: 20px;
     display: flex;
-    flex-direction: column; /* Mengubah layout menjadi kolom */
-    justify-content: flex-start; /* Agar header berada di atas */
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s; /* Animasi perubahan tema */
 }
 
-/* Header Section */
+/* Header Styling */
 .header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%; /* Membuat header memenuhi lebar halaman */
-    text-align: center;
-    margin-bottom: 20px; /* Memberikan jarak antara header dan konten */
-}
-
-.header h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.header p {
-    font-size: 18px;
-}
-
-/* Container utama untuk konten */
-.container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    text-align: center;
+    background-color: #6200ea;
+    color: white;
+    display: flex;
+    justify-content: space-between; /* Mengatur jarak antara kiri dan kanan */
+    align-items: center;
+    padding: 15px 30px;
+    z-index: 1000;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Judul form */
-h2 {
+/* Bagian Kiri */
+.header-left {
+    display: flex;
+    align-items: center; /* Menjaga logo dan profil berada di tengah */
+}
+
+/* Logo */
+.header-left .logo h1 {
     font-size: 24px;
-    margin-bottom: 20px;
-    color: #2d3e50;
+    font-weight: 500;
+    margin: 0;
+    margin-left: 15px; /* Jarak antara profil dan logo */
 }
 
-/* Deskripsi atau teks tambahan */
-p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    color: #555;
+/* Bagian Kanan */
+.header-right {
+    display: flex;
+    align-items: center;
 }
 
-/* Styling untuk form */
+.mode-toggle-input {
+    display: none;
+}
+
+.mode-toggle-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background-color: #bbb;
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.mode-toggle-input:checked + .mode-toggle-label .toggle-thumb {
+    transform: translateX(30px);
+}
+
+.mode-toggle-input:checked + .mode-toggle-label {
+    background-color: #4CAF50;
+}
+
+/* Konten */
+.container {
+    background-color: white;
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    margin-top: 100px; /* Jarak dari header yang fixed */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Animasi perubahan tema */
+}
+
+/* Styling untuk Form dan Checklist */
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
-/* Styling untuk checkbox dan label */
+.attendance-list {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
 label {
+    font-size: 16px;
+    margin: 8px 0;
     display: flex;
     align-items: center;
-    font-size: 16px;
     color: #333;
+    transition: background-color 0.2s;
+}
+
+label:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 12px;
     transform: scale(1.2);
 }
 
-/* Button kirim */
-button {
+/* Footer */
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     background-color: #4CAF50;
     color: white;
-    font-size: 16px;
-    padding: 10px 20px;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between; /* Mengatur tombol di kiri dan kanan */
+    align-items: center;
+    font-size: 18px;
+    animation: fadeInFooter 2s ease-out;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.footer-btn {
+    background-color: #6200ea;
+    color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 20px;
+    width: auto; /* Ukuran tombol otomatis berdasarkan konten */
 }
 
-button:hover {
-    background-color: #45a049;
+.footer-btn:hover {
+    background-color: #3700b3;
 }
 
-/* Styling untuk alert ketika file berhasil diunduh */
-.alert {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    margin-top: 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    display: none;
-    text-align: center;
+.footer-text {
+    font-size: 18px;
+    text-align: center; /* Memastikan teks footer ada di tengah */
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Menempatkan teks footer di tengah */
 }
 
-/* Responsivitas untuk tampilan mobile */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 20px;
+/* Animasi */
+@keyframes fadeInFooter {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #333;
+    color: #f4f4f9;
+}
+
+body.dark-mode .header {
+    background-color: #333;
+}
+
+body.dark-mode .header-left h1 {
+    color: #f4f4f9;
+}
+
+body.dark-mode .container {
+    background-color: #444;
+    color: #f4f4f9;
+}
+
+body.dark-mode footer {
+    background-color: #444;
+}
+
+body.dark-mode .footer-btn {
+    background-color: #6200ea;
+}
+
+body.dark-mode .footer-btn:hover {
+    background-color: #3700b3;
+}
+
+/* Responsivitas untuk perangkat kecil */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 10px 20px; /* Mengurangi padding untuk perangkat kecil */
     }
 
-    p {
-        font-size: 14px;
+    .container {
+        padding: 20px;
+        margin-top: 120px; /* Menyesuaikan jarak dengan header */
     }
 
-    button {
+    .footer-btn {
+        width: 100%; /* Tombol menjadi full-width pada perangkat kecil */
+        margin: 10px 0;
+    }
+
+    .footer-text {
+        font-size: 16px;
+    }
+
+    /* Mengubah ukuran font pada mobile */
+    .header-left h1 {
+        font-size: 18px;
+    }
+
+    .footer-btn {
         padding: 8px 16px;
-        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer-btn {
+        padding: 10px 15px; /* Menyesuaikan tombol pada layar lebih kecil */
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .header-left h1 {
+        font-size: 16px; /* Menyesuaikan ukuran logo */
+    }
+
+    .footer-text {
+        font-size: 14px; /* Ukuran font footer lebih kecil */
     }
 }
