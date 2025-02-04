@@ -12,12 +12,20 @@
         <div class="header-left">
             <div class="logo">
                 <h1>BOKEPINDO</h1>
-                <p class="logo-description">Web By Ahmad Fadillah</p> <!-- Teks kecil di bawah logo -->
+                <p class="logo-description">Web By Ahmad Fadillah</p>
             </div>
         </div>
     
-        <!-- Bagian Kanan: Tombol Mode Gelap -->
         <div class="header-right">
+            <!-- Tombol pencarian untuk mobile -->
+            <button class="search-toggle-btn" id="searchToggleBtn">🔍</button>
+            
+            <!-- Search Container yang akan disembunyikan di mobile -->
+            <div class="search-container" id="searchContainer">
+                <input type="text" id="searchInput" placeholder="Cari..." class="search-input">
+                <button class="emoji-btn">😊</button>
+            </div>
+            
             <div class="toggle-mode">
                 <input type="checkbox" id="modeToggle" class="mode-toggle-input">
                 <label for="modeToggle" class="mode-toggle-label">
@@ -35,6 +43,6 @@
         <button class="scroll-button">Tombol 4</button>
     </div>
 
-    <script src="script.js"></script>
+    <script src="anakbaik.js"></script>
 </body>
 </html>
