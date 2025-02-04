@@ -23,13 +23,68 @@
 
 /* Gaya untuk Teks Kecil di Bawah Logo */
 .header-left .logo .logo-description {
-    font-size: 12px; /* Ukuran font kecil */
-    color: red; /* Warna teks merah */
-    margin-top: 5px; /* Memberikan sedikit jarak antara logo dan teks */
+    font-size: 9px;
+    color: red;
+    margin-top: 1px;
 }
 
-/* Gaya untuk Header Kanan dan Mode Gelap */
-.header-right .toggle-mode {
+/* Gaya untuk Header Kanan dengan Search dan Mode Toggle */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+/* Bagian Search Container */
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 25px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+/* Gaya untuk Input Pencarian */
+.search-input {
+    border: none;
+    outline: none;
+    padding: 6px 10px;
+    border-radius: 25px;
+    font-size: 14px;
+    width: 150px;
+}
+
+/* Gaya untuk Tombol Emoji */
+.emoji-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #333;
+}
+
+/* Tombol pencarian untuk mobile */
+.search-toggle-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Tombol Mode Gelap */
+.toggle-mode {
     display: flex;
     align-items: center;
 }
@@ -70,24 +125,44 @@
 /* Tombol Scrollable */
 .button-container {
     display: flex;
-    overflow-x: auto; /* Membuat tombol bisa digulir ke samping */
-    padding: 10px 30px; /* Mengurangi padding agar lebih dekat dengan header */
+    overflow-x: auto;
+    padding: 10px 30px;
     gap: 10px;
-    margin-top: 0; /* Menghilangkan jarak atas */
+    margin-top: 0;
 }
 
 .scroll-button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 6px 12px; /* Lebih kecil dari sebelumnya */
-    font-size: 12px; /* Ukuran font lebih kecil */
-    border-radius: 50px; /* Membuat tombol menjadi hampir bulat dengan kedua sisi melengkung */
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 50px;
     cursor: pointer;
-    flex-shrink: 0; /* Menghindari tombol menyusut ketika scroll */
+    flex-shrink: 0;
     transition: background-color 0.3s ease;
 }
 
 .scroll-button:hover {
     background-color: #0056b3;
+}
+
+/* Media Query untuk Tampilan Mobile */
+@media (max-width: 768px) {
+    .header-right {
+        gap: 10px;
+    }
+
+    /* Menampilkan div pencarian ketika tombol diklik */
+    .search-container.active {
+        width: 250px;  /* Lebar kontainer lebih besar */
+        opacity: 1;
+    }
+    
+    /* Posisikan tombol pencarian di kiri */
+    .search-toggle-btn {
+        position: absolute;
+        left: 15px;
+        z-index: 10;
+    }
 }
