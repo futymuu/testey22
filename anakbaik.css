@@ -5,6 +5,35 @@
     box-sizing: border-box;
 }
 
+/* Gaya untuk Mode Gelap */
+body.dark-mode {
+    background-color: #121212; /* Latar belakang gelap */
+    color: white; /* Teks putih */
+}
+
+body.dark-mode .header {
+    background-color: #1e1e1e; /* Header lebih gelap */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow lebih gelap */
+}
+
+body.dark-mode .header-left .logo h1 {
+    color: #f1f1f1; /* Logo menjadi putih */
+}
+
+body.dark-mode .header-left .logo .logo-description {
+    color: #ccc; /* Teks deskripsi logo menjadi lebih terang */
+}
+
+body.dark-mode .scroll-button {
+    background-color: #333; /* Tombol dengan latar belakang lebih gelap */
+    color: #fff; /* Teks putih pada tombol */
+    border-radius: 50px;
+}
+
+body.dark-mode .scroll-button:hover {
+    background-color: #444; /* Tombol lebih gelap saat hover */
+}
+
 /* Gaya untuk Header */
 .header {
     display: flex;
@@ -21,70 +50,14 @@
     font-weight: bold;
 }
 
-/* Gaya untuk Teks Kecil di Bawah Logo */
 .header-left .logo .logo-description {
     font-size: 9px;
     color: red;
     margin-top: 1px;
 }
 
-/* Gaya untuk Header Kanan dengan Search dan Mode Toggle */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-}
-
-/* Bagian Search Container */
-.search-container {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    border-radius: 25px;
-    background-color: white;
-    position: absolute;
-    top: 50%;
-    right: 30px;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-    width: 0;
-    overflow: hidden;
-    opacity: 0;
-}
-
-/* Gaya untuk Input Pencarian */
-.search-input {
-    border: none;
-    outline: none;
-    padding: 6px 10px;
-    border-radius: 25px;
-    font-size: 14px;
-    width: 150px;
-}
-
-/* Gaya untuk Tombol Emoji */
-.emoji-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    margin-left: 10px;
-    color: #333;
-}
-
-/* Tombol pencarian untuk mobile */
-.search-toggle-btn {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Tombol Mode Gelap */
-.toggle-mode {
+/* Gaya untuk Header Kanan dan Mode Gelap untuk Desktop */
+.header-right .toggle-mode-desktop {
     display: flex;
     align-items: center;
 }
@@ -147,22 +120,29 @@
     background-color: #0056b3;
 }
 
-/* Media Query untuk Tampilan Mobile */
-@media (max-width: 768px) {
+/* Mode Gelap untuk Mobile (di button container) */
+.toggle-mode-mobile {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+@media screen and (max-width: 425px) {
     .header-right {
-        gap: 10px;
+        display: none;
     }
 
-    /* Menampilkan div pencarian ketika tombol diklik */
-    .search-container.active {
-        width: 250px;  /* Lebar kontainer lebih besar */
-        opacity: 1;
+    .toggle-mode-mobile {
+        display: flex;
     }
-    
-    /* Posisikan tombol pencarian di kiri */
-    .search-toggle-btn {
-        position: absolute;
-        left: 15px;
-        z-index: 10;
+}
+
+@media screen and (min-width: 425px) {
+    .toggle-mode-desktop {
+        display: flex;
+    }
+
+    .toggle-mode-mobile {
+        display: none;
     }
 }
