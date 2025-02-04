@@ -8,7 +8,6 @@
 </head>
 <body>
     <header class="header">
-        <!-- Bagian Kiri: Logo dan Profil -->
         <div class="header-left">
             <div class="logo">
                 <h1>BOKEPINDO</h1>
@@ -17,26 +16,27 @@
         </div>
     
         <div class="header-right">
-            <!-- Tombol pencarian untuk mobile -->
-            <button class="search-toggle-btn" id="searchToggleBtn">🔍</button>
-            
-            <!-- Search Container yang akan disembunyikan di mobile -->
-            <div class="search-container" id="searchContainer">
-                <input type="text" id="searchInput" placeholder="Cari..." class="search-input">
-                <button class="emoji-btn">😊</button>
-            </div>
-            
-            <div class="toggle-mode">
-                <input type="checkbox" id="modeToggle" class="mode-toggle-input">
-                <label for="modeToggle" class="mode-toggle-label">
+            <div class="toggle-mode-desktop">
+                <input type="checkbox" id="modeToggleDesktop" class="mode-toggle-input">
+                <label for="modeToggleDesktop" class="mode-toggle-label">
                     <span class="toggle-thumb"></span>
                 </label>
             </div>
         </div>
     </header>
     
-    <!-- Tombol Scrollable -->
     <div class="button-container">
+        <div class="toggle-mode-mobile">
+            <input type="checkbox" id="modeToggleMobile" class="mode-toggle-input">
+            <label for="modeToggleMobile" class="mode-toggle-label">
+                <span class="toggle-thumb"></span>
+            </label>
+        </div>
+
+        <button class="scroll-button">Tombol 1</button>
+        <button class="scroll-button">Tombol 2</button>
+        <button class="scroll-button">Tombol 3</button>
+        <button class="scroll-button">Tombol 4</button>
         <button class="scroll-button">Tombol 1</button>
         <button class="scroll-button">Tombol 2</button>
         <button class="scroll-button">Tombol 3</button>
