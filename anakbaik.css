@@ -5,33 +5,49 @@
     box-sizing: border-box;
 }
 
+/* Variabel CSS untuk memudahkan pengaturan warna */
+:root {
+    --background-light: #f8f8f8;
+    --background-dark: #121212;
+    --primary-color: #007bff;
+    --button-hover-color: #0056b3;
+    --button-dark-background: #333;
+    --button-dark-hover: #444;
+    --text-light: #f1f1f1;
+    --text-dark: #333;
+    --text-muted: #ccc;
+    --link-color: #4caf50;
+    --link-hover-color: #81c784;
+}
+
 /* Gaya untuk Mode Gelap */
 body.dark-mode {
-    background-color: #121212; /* Latar belakang gelap */
-    color: white; /* Teks putih */
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark-mode .header {
-    background-color: #1e1e1e; /* Header lebih gelap */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow lebih gelap */
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .header-left .logo h1 {
-    color: #f1f1f1; /* Logo menjadi putih */
+    color: var(--text-light);
 }
 
 body.dark-mode .header-left .logo .logo-description {
-    color: #ccc; /* Teks deskripsi logo menjadi lebih terang */
+    color: var(--text-muted);
 }
 
 body.dark-mode .scroll-button {
-    background-color: #333; /* Tombol dengan latar belakang lebih gelap */
-    color: #fff; /* Teks putih pada tombol */
+    background-color: var(--button-dark-background);
+    color: var(--text-light);
     border-radius: 50px;
 }
 
 body.dark-mode .scroll-button:hover {
-    background-color: #444; /* Tombol lebih gelap saat hover */
+    background-color: var(--button-dark-hover);
 }
 
 /* Gaya untuk Header */
@@ -39,14 +55,14 @@ body.dark-mode .scroll-button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f8f8f8;
+    background-color: var(--background-light);
     padding: 15px 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header-left .logo h1 {
     font-size: 24px;
-    color: #333;
+    color: var(--text-dark);
     font-weight: bold;
 }
 
@@ -102,10 +118,15 @@ body.dark-mode .scroll-button:hover {
     padding: 10px 30px;
     gap: 10px;
     margin-top: 0;
+    position: sticky; /* Menjadikan tombol scroll sticky */
+    top: 0; /* Menempel di bagian atas layar */
+    background-color: var(--background-light); /* Pastikan tombol memiliki latar belakang */
+    z-index: 1000; /* Pastikan tombol di atas konten lainnya */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Memberikan sedikit bayangan pada tombol */
 }
 
 .scroll-button {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 6px 12px;
@@ -117,7 +138,7 @@ body.dark-mode .scroll-button:hover {
 }
 
 .scroll-button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-color);
 }
 
 /* Mode Gelap untuk Mobile (di button container) */
@@ -150,7 +171,7 @@ body.dark-mode .scroll-button:hover {
 }
 
 .card-header {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     padding: 10px;
     color: white;
     text-align: center;
@@ -167,7 +188,7 @@ body.dark-mode .scroll-button:hover {
 
 .card-body a {
     text-decoration: none;
-    color: #007bff;
+    color: var(--primary-color);
     font-weight: bold;
 }
 
@@ -177,83 +198,66 @@ body.dark-mode .scroll-button:hover {
 
 /* Dark Mode */
 body.dark-mode .card {
-    background-color: #333; /* Dark background for card */
-    color: white; /* Light text for card */
+    background-color: #333;
+    color: var(--text-light);
 }
 
 body.dark-mode .card-header {
-    background-color: #555; /* Darker header */
+    background-color: #555;
 }
 
 body.dark-mode .card-body {
-    background-color: #444; /* Dark background for body of card */
+    background-color: #444;
 }
 
 body.dark-mode .card-body a {
-    color: #4caf50; /* Greenish link color in dark mode */
+    color: var(--link-color);
 }
 
 body.dark-mode .card-body a:hover {
-    color: #81c784; /* Light green when hovering over links */
+    color: var(--link-hover-color);
 }
 
-/* Mode Gelap untuk Body secara keseluruhan */
-body.dark-mode {
-    background-color: #121212; /* Dark background for body */
-    color: white; /* Light text for the body */
-}
-
-body.dark-mode .scroll-button {
-    background-color: #333; /* Dark buttons */
-    color: white;
-}
-
-body.dark-mode .scroll-button:hover {
-    background-color: #444; /* Darker button on hover */
+body.dark-mode .button-container {
+    background-color: var(--background-dark); /* Latar belakang tombol di mode gelap */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Bayangan lebih gelap di mode gelap */
 }
 
 /* Responsif untuk Mobile (max-width 425px) */
 @media screen and (max-width: 425px) {
-   
-    /* Menyesuaikan lebar kartu */
+
     .card {
-        width: 100%; /* Kartu mengambil 100% lebar pada layar kecil */
-        margin-bottom: 20px; /* Memberi jarak antar kartu */
+        width: 100%;
+        margin-bottom: 20px;
     }
 
-    /* Mengatur ukuran font pada card-body */
     .card-body h3 {
-        font-size: 16px; /* Ukuran font lebih kecil untuk mobile */
+        font-size: 16px;
     }
 
     .card-body a {
-        font-size: 14px; /* Ukuran font link lebih kecil di mobile */
+        font-size: 14px;
     }
 
-    /* Tombol scrollable untuk mobile */
     .button-container {
         padding: 10px 15px;
-        gap: 8px; /* Mengurangi jarak antar tombol */
+        gap: 8px;
     }
 
-    /* Menyesuaikan ukuran tombol scroll */
     .scroll-button {
-        font-size: 10px; /* Ukuran font tombol lebih kecil di mobile */
-        padding: 5px 10px; /* Padding lebih kecil */
+        font-size: 10px;
+        padding: 5px 10px;
     }
 }
 
 /* Responsif untuk Desktop (min-width 426px) */
 @media screen and (min-width: 426px) {
-   
-    /* Menyesuaikan lebar kartu pada desktop */
     .card {
-        width: 250px; /* Lebar tetap untuk kartu di desktop */
+        width: 250px;
     }
 
-    /* Ukuran font kartu */
     .card-body h3 {
-        font-size: 18px; /* Ukuran font normal di desktop */
+        font-size: 18px;
     }
 }
 
@@ -276,4 +280,3 @@ body.dark-mode .scroll-button:hover {
         display: none;
     }
 }
-
