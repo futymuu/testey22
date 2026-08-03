@@ -1,0 +1,875 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0b0b0b;
+  --panel: #191919;
+  --panel-border: #363636;
+
+  --board-white: #f0f0f0;
+  --board-black: #303030;
+
+  --text: #f5f5f5;
+  --muted: #999;
+
+  --button: #eeeeee;
+  --button-text: #111;
+
+  --green: #43a047;
+  --red: #c62828;
+}
+
+body {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #333 0%,
+      #151515 40%,
+      #070707 100%
+    );
+
+  color: var(--text);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+button {
+  font: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app {
+  width: min(1250px, 95%);
+  margin: auto;
+
+  padding:
+    25px 0 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+  text-align: center;
+
+  margin-bottom: 25px;
+}
+
+header h1 {
+  font-size:
+    clamp(25px, 5vw, 45px);
+
+  letter-spacing: 2px;
+
+  color: #fff;
+}
+
+header p {
+  margin-top: 8px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel {
+  background:
+    rgba(25, 25, 25, .97);
+
+  border:
+    1px solid var(--panel-border);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 15px 45px
+    rgba(0, 0, 0, .45);
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu {
+  width: min(650px, 100%);
+
+  margin:
+    30px auto;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+.menu h2 {
+  margin-bottom: 20px;
+}
+
+.mode-btn {
+  width: 100%;
+
+  margin: 7px 0;
+
+  padding: 15px;
+
+  border:
+    1px solid #555;
+
+  border-radius: 10px;
+
+  background: var(--button);
+
+  color: var(--button-text);
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    transform .15s ease,
+    background .15s ease;
+}
+
+.mode-btn:hover {
+  background: #fff;
+
+  transform:
+    translateY(-2px);
+}
+
+.rules {
+  margin-top: 25px;
+
+  padding: 20px;
+
+  background: #121212;
+
+  border-radius: 10px;
+
+  text-align: left;
+}
+
+.rules h3 {
+  margin-bottom: 10px;
+}
+
+.rules ul {
+  padding-left: 20px;
+}
+
+.rules li {
+  margin: 7px 0;
+
+  color: #bbb;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   GAME
+========================================================= */
+
+.game {
+  animation:
+    fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+
+  padding:
+    15px 20px;
+}
+
+#turnText {
+  display: block;
+
+  font-size: 18px;
+
+  font-weight: bold;
+}
+
+#statusText {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #999;
+
+  font-size: 14px;
+}
+
+.controls {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.controls button,
+.modal-box button {
+  padding:
+    9px 14px;
+
+  border:
+    1px solid #555;
+
+  border-radius: 8px;
+
+  background: #eee;
+
+  color: #111;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    .15s ease;
+}
+
+.controls button:hover,
+.modal-box button:hover {
+  background: #fff;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(300px, 760px)
+    300px;
+
+  gap: 20px;
+
+  justify-content: center;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   BOARD
+========================================================= */
+
+.board-wrap {
+  width: 100%;
+}
+
+.board {
+  width:
+    min(100%, 760px);
+
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(8, 1fr);
+
+  grid-template-rows:
+    repeat(8, 1fr);
+
+  border:
+    8px solid #111;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 55px
+    rgba(0, 0, 0, .6);
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   KOTAK PAPAN
+========================================================= */
+
+.square {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+
+/*
+  WARNA PAPAN TIDAK TERGANTUNG BIDAK.
+  KOORDINAT YANG MENENTUKAN.
+*/
+
+.square.light {
+  background: #f0f0f0 !important;
+}
+
+.square.dark {
+  background: #303030 !important;
+}
+
+
+/* =========================================================
+   BIDAK
+========================================================= */
+
+.piece {
+  position: relative;
+
+  z-index: 10;
+
+  display: block;
+
+  font-family:
+    "DejaVu Sans",
+    "Segoe UI Symbol",
+    "Noto Sans Symbols",
+    "Arial Unicode MS",
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(30px, 7vw, 68px);
+
+  line-height: 1;
+
+  user-select: none;
+
+  cursor: pointer;
+
+  -webkit-font-smoothing:
+    antialiased;
+
+  text-rendering:
+    geometricPrecision;
+
+  transform:
+    translateZ(0);
+}
+
+
+/* =========================================================
+   BIDAK PUTIH
+========================================================= */
+
+.white-piece {
+  color: #ffffff !important;
+
+  /*
+    Outline hitam supaya tetap jelas
+    di kotak putih maupun hitam.
+  */
+
+  -webkit-text-stroke:
+    1.5px #111;
+
+  text-shadow:
+    2px 2px 0 #111,
+    -2px 2px 0 #111,
+    2px -2px 0 #111,
+    -2px -2px 0 #111,
+
+    0 3px 6px
+    rgba(0, 0, 0, .8);
+}
+
+
+/* =========================================================
+   BIDAK HITAM
+========================================================= */
+
+.black-piece {
+  color: #050505 !important;
+
+  /*
+    Outline putih supaya bidak hitam
+    tidak hilang ketika berada di kotak hitam.
+  */
+
+  -webkit-text-stroke:
+    1.5px #ffffff;
+
+  text-shadow:
+    2px 2px 0 #fff,
+    -2px 2px 0 #fff,
+    2px -2px 0 #fff,
+    -2px -2px 0 #fff,
+
+    0 3px 6px
+    rgba(0, 0, 0, .8);
+}
+
+
+/* =========================================================
+   SELECTED
+========================================================= */
+
+.square.selected {
+  /*
+    Jangan mengganti background.
+    Kita cuma kasih outline.
+  */
+
+  outline:
+    4px solid rgba(255, 190, 0, .85);
+
+  outline-offset:
+    -4px;
+
+  z-index: 4;
+}
+
+
+/* =========================================================
+   LEGAL MOVE
+========================================================= */
+
+.square.legal::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: 3;
+
+  width: 20%;
+  height: 20%;
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 0, 0, .35);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CAPTURE
+========================================================= */
+
+.square.capture::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 7%;
+
+  z-index: 3;
+
+  border:
+    5px solid
+    rgba(190, 0, 0, .55);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   LAST MOVE
+========================================================= */
+
+.square.last-move {
+  box-shadow:
+    inset 0 0 0 4px
+    rgba(255, 215, 0, .28);
+}
+
+
+/* =========================================================
+   CHECK
+========================================================= */
+
+.square.check {
+  background:
+    #a51d24 !important;
+
+  box-shadow:
+    inset 0 0 25px
+    rgba(255, 0, 0, .8);
+}
+
+
+/* =========================================================
+   KOORDINAT PAPAN
+========================================================= */
+
+.coords-file,
+.coords-rank {
+  position: absolute;
+
+  z-index: 20;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 11px;
+
+  font-weight: bold;
+
+  pointer-events: none;
+
+  opacity: .65;
+}
+
+.coords-file {
+  right: 4px;
+
+  bottom: 2px;
+}
+
+.coords-rank {
+  left: 4px;
+
+  top: 2px;
+}
+
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.legend {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 10px;
+
+  margin-top: 10px;
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   SIDE PANEL
+========================================================= */
+
+.side {
+  overflow: hidden;
+}
+
+.side h2 {
+  padding: 18px;
+
+  border-bottom:
+    1px solid #333;
+}
+
+.move-list {
+  height: 380px;
+
+  overflow-y: auto;
+
+  padding: 10px;
+}
+
+.move-row {
+  display: grid;
+
+  grid-template-columns:
+    45px 1fr 1fr;
+
+  padding: 8px;
+
+  border-radius: 6px;
+}
+
+.move-row:nth-child(even) {
+  background: #242424;
+}
+
+.move-number {
+  color: #777;
+}
+
+.move-white,
+.move-black {
+  font-family:
+    monospace;
+}
+
+.side-info {
+  padding: 18px;
+
+  border-top:
+    1px solid #333;
+}
+
+.side-info h3 {
+  margin-bottom: 5px;
+}
+
+.side-info p {
+  margin-bottom: 15px;
+
+  color: #aaa;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(0, 0, 0, .8);
+}
+
+.modal-box {
+  width:
+    min(450px, 100%);
+
+  padding: 28px;
+
+  border:
+    1px solid #555;
+
+  border-radius: 14px;
+
+  background: #1d1d1d;
+
+  text-align: center;
+
+  box-shadow:
+    0 25px 80px #000;
+}
+
+.modal-box h2 {
+  margin-bottom: 10px;
+}
+
+.modal-box p {
+  margin-bottom: 20px;
+
+  color: #aaa;
+}
+
+#promotionChoices {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 8px;
+}
+
+.promotion-btn {
+  padding: 12px;
+
+  border:
+    1px solid #555;
+
+  border-radius: 8px;
+
+  background: #eee;
+
+  font-size: 42px;
+
+  cursor: pointer;
+}
+
+.promotion-btn:hover {
+  background: #fff;
+}
+
+#gameOver .modal-box button {
+  margin: 5px;
+}
+
+#resultDetails {
+  margin: 15px 0;
+
+  color: #aaa;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.move-list::-webkit-scrollbar {
+  width: 7px;
+}
+
+.move-list::-webkit-scrollbar-track {
+  background: #111;
+}
+
+.move-list::-webkit-scrollbar-thumb {
+  background: #555;
+
+  border-radius: 10px;
+}
+
+.move-list::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side {
+    width: 100%;
+  }
+
+  .move-list {
+    height: 220px;
+  }
+
+  .board {
+    margin:
+      0 auto;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .app {
+    width: 100%;
+
+    padding:
+      12px 8px 25px;
+  }
+
+  header {
+    margin-bottom: 15px;
+  }
+
+  .topbar {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .controls {
+    width: 100%;
+  }
+
+  .controls button {
+    flex: 1;
+  }
+
+  .board {
+    border-width: 4px;
+  }
+
+  .legend {
+    font-size: 11px;
+  }
+
+  .menu {
+    padding:
+      20px 15px;
+  }
+
+  .piece {
+    font-size:
+      clamp(27px, 10vw, 55px);
+  }
+}

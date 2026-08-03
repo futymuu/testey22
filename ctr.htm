@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catur Hitam Putih</title>
+  <link rel="stylesheet" href="ctr.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>♔ CATUR HITAM & PUTIH ♚</h1>
+      <p>Game catur vanilla HTML + CSS + JavaScript</p>
+    </header>
+
+    <section id="menu" class="panel menu">
+      <h2>Pilih Mode</h2>
+      <button class="mode-btn" data-mode="pvp">♙ Multiplayer — 2 Pemain</button>
+      <button class="mode-btn" data-mode="ai">♟ vs AI — Komputer</button>
+      <div class="rules">
+        <h3>Peraturan Catur</h3>
+        <ul>
+          <li>Putih bergerak lebih dulu, lalu bergantian.</li>
+          <li>Raja hanya boleh bergerak satu petak.</li>
+          <li>Ratu bergerak lurus atau diagonal sejauh yang tersedia.</li>
+          <li>Benteng bergerak lurus, gajah diagonal, kuda membentuk huruf L.</li>
+          <li>Pion maju satu petak, dari posisi awal boleh dua petak, dan makan diagonal.</li>
+          <li>Raja tidak boleh masuk atau tetap dalam keadaan skak.</li>
+          <li>Rokade hanya boleh jika raja dan benteng belum bergerak, jalurnya kosong, dan raja tidak melewati petak yang diserang.</li>
+          <li>En passant tersedia setelah pion lawan maju dua petak dari posisi awal.</li>
+          <li>Pion yang mencapai baris terakhir otomatis meminta promosi: Ratu, Benteng, Gajah, atau Kuda.</li>
+          <li>Skakmat mengakhiri permainan. Jika tidak ada langkah legal tetapi raja tidak skak, hasilnya remis (stalemate).</li>
+        </ul>
+      </div>
+    </section>
+
+    <main id="game" class="game hidden">
+      <div class="topbar panel">
+        <div>
+          <strong id="turnText">Giliran: Putih</strong>
+          <span id="statusText">Siap.</span>
+        </div>
+        <div class="controls">
+          <button id="undoBtn">↶ Undo</button>
+          <button id="restartBtn">↻ Mulai Ulang</button>
+          <button id="menuBtn">☰ Menu</button>
+        </div>
+      </div>
+
+      <div class="layout">
+        <section class="board-wrap">
+          <div id="board" class="board" aria-label="Papan catur"></div>
+          <div class="legend">
+            <span>Putih: ♔ ♕ ♖ ♗ ♘ ♙</span>
+            <span>Hitam: ♚ ♛ ♜ ♝ ♞ ♟</span>
+          </div>
+        </section>
+
+        <aside class="side panel">
+          <h2>Langkah</h2>
+          <div id="moveList" class="move-list"></div>
+          <div class="side-info">
+            <h3>Mode</h3>
+            <p id="modeText">—</p>
+            <h3>Petunjuk</h3>
+            <p>Klik bidak untuk melihat langkah legal. Klik petak tujuan untuk memindahkan.</p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <div id="promotion" class="modal hidden">
+      <div class="modal-box">
+        <h2>Promosi Pion</h2>
+        <p>Pilih bidak:</p>
+        <div id="promotionChoices"></div>
+      </div>
+    </div>
+
+    <div id="gameOver" class="modal hidden">
+      <div class="modal-box">
+        <h2 id="resultTitle">Game Selesai</h2>
+        <div id="resultDetails"></div>
+        <button id="againBtn">Main Lagi</button>
+        <button id="resultMenuBtn">Kembali ke Menu</button>
+      </div>
+    </div>
+  </div>
+  <script src="ctr.js"></script>
+</body>
+</html>
