@@ -1,0 +1,617 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #1e293b
+        );
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+}
+
+
+.container {
+
+    width: 100%;
+
+    max-width: 800px;
+
+}
+
+
+.screen {
+
+    display: none;
+
+    background: #1f2937;
+
+    border:
+        1px solid
+        #374151;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, .35);
+
+}
+
+
+.screen.active {
+
+    display: block;
+
+}
+
+
+h1 {
+
+    text-align: center;
+
+    font-size: 38px;
+
+    margin-bottom: 10px;
+
+}
+
+
+h2 {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+h3 {
+
+    margin-bottom: 15px;
+
+}
+
+
+.subtitle {
+
+    text-align: center;
+
+    color: #9ca3af;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* MENU */
+
+.menu-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+}
+
+
+button {
+
+    border: none;
+
+    cursor: pointer;
+
+    border-radius: 12px;
+
+    padding: 17px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    transition: .15s;
+
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.1);
+
+}
+
+
+button:active {
+
+    transform:
+        scale(.97);
+
+}
+
+
+.menu-btn {
+
+    background: #374151;
+
+    color: white;
+
+    min-height: 80px;
+
+}
+
+
+.menu-btn small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #d1d5db;
+
+}
+
+
+.easy {
+
+    background: #15803d;
+
+}
+
+
+.medium {
+
+    background: #ca8a04;
+
+}
+
+
+.hard {
+
+    background: #dc2626;
+
+}
+
+
+.count-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+/* STATISTIK */
+
+.stats {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    background: #111827;
+
+}
+
+
+.stats-title {
+
+    font-size: 20px;
+
+    margin-bottom: 15px;
+
+    font-weight: bold;
+
+}
+
+
+.stat-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 8px 0;
+
+    border-bottom:
+        1px solid
+        #374151;
+
+}
+
+
+.stat-row:last-of-type {
+
+    border-bottom: none;
+
+}
+
+
+.danger {
+
+    background: #991b1b;
+
+    color: white;
+
+    margin-top: 15px;
+
+    width: 100%;
+
+}
+
+
+/* BUTTON UMUM */
+
+.back-btn {
+
+    background: #4b5563;
+
+    color: white;
+
+    width: 100%;
+
+    margin-top: 15px;
+
+}
+
+
+.primary {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.secondary {
+
+    background: #4b5563;
+
+    color: white;
+
+}
+
+
+/* INPUT JUMLAH SOAL */
+
+.manual-count {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background: #111827;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+}
+
+
+.manual-input {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.manual-input input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 15px;
+
+    border:
+        2px solid
+        #374151;
+
+    border-radius: 10px;
+
+    background: #1f2937;
+
+    color: white;
+
+    font-size: 18px;
+
+    outline: none;
+
+}
+
+
+.manual-input input:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+.manual-input button {
+
+    padding:
+        15px 25px;
+
+}
+
+
+.manual-count small {
+
+    color: #9ca3af;
+
+}
+
+
+#manualError {
+
+    color: #f87171;
+
+    margin-top: 10px;
+
+    min-height: 20px;
+
+}
+
+
+/* GAME */
+
+.game-top {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.info-box {
+
+    background: #111827;
+
+    padding:
+        12px 16px;
+
+    border-radius: 10px;
+
+}
+
+
+.progress {
+
+    width: 100%;
+
+    height: 10px;
+
+    background: #374151;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 30px;
+
+}
+
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: #22c55e;
+
+    transition: width .3s;
+
+}
+
+
+.question {
+
+    text-align: center;
+
+    font-size: 48px;
+
+    font-weight: bold;
+
+    margin: 35px 0;
+
+}
+
+
+/* 3 X 3 */
+
+.answer-wrapper {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.answer-btn {
+
+    background: #374151;
+
+    color: white;
+
+    min-height: 75px;
+
+    font-size: 24px;
+
+}
+
+
+.answer-btn.correct {
+
+    background: #16a34a;
+
+}
+
+
+.answer-btn.wrong {
+
+    background: #dc2626;
+
+}
+
+
+.answer-btn:disabled {
+
+    cursor: not-allowed;
+
+    opacity: .8;
+
+}
+
+
+.message {
+
+    text-align: center;
+
+    min-height: 30px;
+
+    margin-top: 20px;
+
+    font-weight: bold;
+
+    font-size: 18px;
+
+}
+
+
+/* HASIL */
+
+.result-score {
+
+    text-align: center;
+
+    font-size: 60px;
+
+    font-weight: bold;
+
+    margin: 20px 0;
+
+}
+
+
+.result-detail {
+
+    text-align: center;
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+}
+
+
+.result-actions {
+
+    display: grid;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .screen {
+
+        padding: 20px;
+
+    }
+
+
+    h1 {
+
+        font-size: 30px;
+
+    }
+
+
+    .menu-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .question {
+
+        font-size: 38px;
+
+    }
+
+
+    .answer-btn {
+
+        min-height: 65px;
+
+        font-size: 20px;
+
+    }
+
+
+    .manual-input {
+
+        flex-direction: column;
+
+    }
+
+}

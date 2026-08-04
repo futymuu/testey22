@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Math Test Generator</title>
+
+    <link rel="stylesheet" href="mtk.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- MENU OPERASI -->
+    <section id="operationScreen" class="screen active">
+
+        <h1>Math Test</h1>
+
+        <p class="subtitle">
+            Pilih operasi matematika
+        </p>
+
+        <div class="menu-grid">
+
+            <button class="menu-btn"
+                    onclick="selectOperation('addition')">
+                ➕ Pertambahan
+            </button>
+
+            <button class="menu-btn"
+                    onclick="selectOperation('subtraction')">
+                ➖ Pengurangan
+            </button>
+
+            <button class="menu-btn"
+                    onclick="selectOperation('multiplication')">
+                ✖️ Perkalian
+            </button>
+
+            <button class="menu-btn"
+                    onclick="selectOperation('division')">
+                ➗ Pembagian
+            </button>
+
+        </div>
+
+
+        <!-- STATISTIK -->
+
+        <div class="stats">
+
+            <div class="stats-title">
+                Statistik
+            </div>
+
+            <div class="stat-row">
+                <span>Benar</span>
+                <strong id="totalCorrect">0</strong>
+            </div>
+
+            <div class="stat-row">
+                <span>Salah</span>
+                <strong id="totalWrong">0</strong>
+            </div>
+
+            <div class="stat-row">
+                <span>Total Soal</span>
+                <strong id="totalAnswered">0</strong>
+            </div>
+
+            <div class="stat-row">
+                <span>Akurasi</span>
+                <strong id="accuracy">0%</strong>
+            </div>
+
+            <button class="danger"
+                    onclick="resetStats()">
+                Reset Statistik
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MENU KESULITAN -->
+
+    <section id="difficultyScreen" class="screen">
+
+        <h2 id="operationTitle">
+            Pilih Kesulitan
+        </h2>
+
+        <p class="subtitle">
+            Pilih tingkat kesulitan.
+        </p>
+
+        <div class="menu-grid">
+
+            <button class="menu-btn easy"
+                    onclick="selectDifficulty('easy')">
+
+                Gampang
+
+                <small>
+                    Angka 1 - 10
+                </small>
+
+            </button>
+
+
+            <button class="menu-btn medium"
+                    onclick="selectDifficulty('medium')">
+
+                Agak Sulit
+
+                <small>
+                    Angka 10 - 50
+                </small>
+
+            </button>
+
+
+            <button class="menu-btn hard"
+                    onclick="selectDifficulty('hard')">
+
+                Sangat Sulit
+
+                <small>
+                    Angka 50 - 100
+                </small>
+
+            </button>
+
+        </div>
+
+
+        <button class="back-btn"
+                onclick="showScreen('operationScreen')">
+
+            ← Kembali
+
+        </button>
+
+    </section>
+
+
+    <!-- JUMLAH SOAL -->
+
+    <section id="countScreen" class="screen">
+
+        <h2>Berapa Soal?</h2>
+
+        <p class="subtitle">
+            Pilih jumlah soal.
+        </p>
+
+
+        <div class="menu-grid">
+
+            <button class="count-btn"
+                    onclick="startGame(10)">
+                10 Soal
+            </button>
+
+            <button class="count-btn"
+                    onclick="startGame(20)">
+                20 Soal
+            </button>
+
+            <button class="count-btn"
+                    onclick="startGame(100)">
+                100 Soal
+            </button>
+
+            <button class="count-btn"
+                    onclick="startGame(200)">
+                200 Soal
+            </button>
+
+        </div>
+
+
+        <!-- INPUT MANUAL -->
+
+        <div class="manual-count">
+
+            <h3>Atau isi sendiri</h3>
+
+            <div class="manual-input">
+
+                <input
+                    id="manualQuestionCount"
+                    type="number"
+                    min="1"
+                    max="1000"
+                    placeholder="Contoh: 35"
+                >
+
+                <button class="primary"
+                        onclick="startManualGame()">
+
+                    Mulai
+
+                </button>
+
+            </div>
+
+            <small>
+                Masukkan 1 - 1000 soal
+            </small>
+
+            <p id="manualError"></p>
+
+        </div>
+
+
+        <button class="back-btn"
+                onclick="showScreen('difficultyScreen')">
+
+            ← Kembali
+
+        </button>
+
+    </section>
+
+
+    <!-- GAME -->
+
+    <section id="gameScreen" class="screen">
+
+        <div class="game-top">
+
+            <div class="info-box">
+
+                Soal:
+                <strong id="questionNumber">
+                    1/10
+                </strong>
+
+            </div>
+
+            <div class="info-box">
+
+                Benar:
+                <strong id="gameCorrect">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="info-box">
+
+                Salah:
+                <strong id="gameWrong">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div id="progressBar"
+                 class="progress-bar">
+            </div>
+
+        </div>
+
+
+        <div id="questionText"
+             class="question">
+
+            5 + 5 = ?
+
+        </div>
+
+
+        <!-- 3 X 3 JAWABAN -->
+
+        <div id="answerWrapper"
+             class="answer-wrapper">
+
+        </div>
+
+
+        <div id="message"
+             class="message">
+
+        </div>
+
+    </section>
+
+
+    <!-- HASIL -->
+
+    <section id="resultScreen"
+             class="screen">
+
+        <h2>Hasil Tes</h2>
+
+
+        <div id="resultScore"
+             class="result-score">
+
+            0%
+
+        </div>
+
+
+        <div id="resultDetail"
+             class="result-detail">
+
+        </div>
+
+
+        <div class="result-actions">
+
+            <button class="primary"
+                    onclick="playAgain()">
+
+                🔄 Main Lagi
+
+            </button>
+
+
+            <button class="secondary"
+                    onclick="
+                    showScreen('operationScreen');
+                    updateStatsUI();
+                    ">
+
+                🏠 Menu Utama
+
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script src="mtk.js"></script>
+
+</body>
+</html>
