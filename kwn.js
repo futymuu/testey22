@@ -153,7 +153,23 @@ function updateGreeting() {
   }, 280);
 }
 
-// ==================== NAVIGATION ====================
+// ==================== NAVIGATION + SIDEBAR HP ====================
+function openSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  if (sb) sb.classList.add('open');
+  if (ov) ov.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  if (sb) sb.classList.remove('open');
+  if (ov) ov.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
 function setupNavigation() {
   const switchTab = (tab) => {
     document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(b => {
@@ -164,13 +180,40 @@ function setupNavigation() {
     if (tab === 'analisis') renderAnalisis();
     if (tab === 'riwayat') renderRiwayat();
     if (tab === 'anggota') renderAnggota();
+    closeSidebar();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   document.querySelectorAll('.nav-btn, .bottom-nav-btn').forEach(btn => {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
+
+  // Tombol hamburger buka menu
+  const menuBtn = document.getElementById('menuToggleBtn');
+  if (menuBtn) menuBtn.addEventListener('click', openSidebar);
+
+  // Tombol X tutup menu
+  const closeBtn = document.getElementById('sidebarCloseBtn');
+  if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+
+  // Klik overlay tutup menu
+  const overlay = document.getElementById('sidebarOverlay');
+  if (overlay) overlay.addEventListener('click', closeSidebar);
+
+  // Swipe kiri di sidebar untuk tutup (opsional sederhana)
+  let touchStartX = 0;
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    sidebar.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    sidebar.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      if (dx < -60) closeSidebar();
+    }, { passive: true });
+  }
 }
+
 
 // ==================== FORMS ====================
 function setupForms() {
