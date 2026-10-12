@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kas Keluarga - Pemasukan & Pengeluaran</title>
+  <link rel="stylesheet" href="kwn.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <!-- ==================== LOGIN ==================== -->
+  <div id="loginPage" class="page active">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo">💰</div>
+        <h1>Kas Keluarga</h1>
+        <p>Pencatatan Pemasukan & Pengeluaran Real-time</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="username" placeholder="Masukkan username" required autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Masukkan password" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+      </form>
+      <div class="login-info">
+        <p><strong>silahkan login</strong></p>
+        <ul>
+      
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== APP ==================== -->
+  <div id="appPage" class="page">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-sm">💰</div>
+        <span>Kas Keluarga</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-tab="dashboard">📊 Dashboard</button>
+        <button class="nav-btn" data-tab="tambah">➕ Tambah Data</button>
+        <button class="nav-btn" data-tab="riwayat">📋 Riwayat</button>
+        <button class="nav-btn" data-tab="analisis">📈 Analisis</button>
+        <button class="nav-btn" data-tab="anggota">👥 Anggota</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <span id="currentUserName">-</span>
+          <small id="currentUserRole">-</small>
+        </div>
+        <button id="logoutBtn" class="btn btn-outline btn-sm">Keluar</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="tab-content active">
+        <header class="page-header">
+          <h2>Dashboard</h2>
+          <p id="greeting">Selamat datang!</p>
+        </header>
+
+        <div class="stats-grid">
+          <div class="stat-card income">
+            <div class="stat-icon">📥</div>
+            <div class="stat-body">
+              <span class="stat-label">Total Pemasukan</span>
+              <span class="stat-value" id="totalPemasukan">Rp 0</span>
+            </div>
+          </div>
+          <div class="stat-card expense">
+            <div class="stat-icon">📤</div>
+            <div class="stat-body">
+              <span class="stat-label">Total Pengeluaran</span>
+              <span class="stat-value" id="totalPengeluaran">Rp 0</span>
+            </div>
+          </div>
+          <div class="stat-card balance">
+            <div class="stat-icon">💵</div>
+            <div class="stat-body">
+              <span class="stat-label">Saldo</span>
+              <span class="stat-value" id="saldo">Rp 0</span>
+            </div>
+          </div>
+          <div class="stat-card month">
+            <div class="stat-icon">📅</div>
+            <div class="stat-body">
+              <span class="stat-label">Bulan Ini (Pengeluaran)</span>
+              <span class="stat-value" id="pengeluaranBulanIni">Rp 0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <h3>Pemasukan vs Pengeluaran</h3>
+            <canvas id="chartBar"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Pengeluaran per Kategori</h3>
+            <canvas id="chartPie"></canvas>
+          </div>
+        </div>
+
+        <div class="recent-card">
+          <h3>Transaksi Terbaru</h3>
+          <div id="recentList" class="transaction-list"></div>
+        </div>
+      </section>
+
+      <!-- TAMBAH DATA -->
+      <section id="tambah" class="tab-content">
+        <header class="page-header">
+          <h2>Tambah Transaksi</h2>
+          <p>Catat pemasukan atau pengeluaran baru</p>
+        </header>
+
+        <div class="form-tabs">
+          <button class="form-tab active" data-form="pemasukan">Pemasukan</button>
+          <button class="form-tab" data-form="pengeluaran">Pengeluaran</button>
+        </div>
+
+        <!-- Form Pemasukan -->
+        <form id="formPemasukan" class="data-form active">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tanggal</label>
+              <input type="date" id="pemasukanTanggal" required />
+            </div>
+            <div class="form-group">
+              <label>Jumlah (Rp)</label>
+              <input type="number" id="pemasukanJumlah" min="1" placeholder="Contoh: 500000" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Keterangan</label>
+            <input type="text" id="pemasukanKet" placeholder="Gaji, bonus, dll" required />
+          </div>
+          <div class="form-group">
+            <label>Anggota</label>
+            <select id="pemasukanAnggota" required></select>
+          </div>
+          <button type="submit" class="btn btn-primary">Simpan Pemasukan</button>
+        </form>
+
+        <!-- Form Pengeluaran -->
+        <form id="formPengeluaran" class="data-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tanggal</label>
+              <input type="date" id="pengeluaranTanggal" required />
+            </div>
+            <div class="form-group">
+              <label>Jumlah (Rp)</label>
+              <input type="number" id="pengeluaranJumlah" min="1" placeholder="Contoh: 150000" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Kategori Pengeluaran</label>
+            <select id="pengeluaranKategori" required>
+              <option value="">-- Pilih Kategori --</option>
+              <option value="makan">🍽️ Makan</option>
+              <option value="wifi">📶 Wifi</option>
+              <option value="beras">🌾 Beras</option>
+              <option value="kontrakan">🏠 Pembayaran Kontrakan</option>
+              <option value="lainnya">📦 Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Keterangan</label>
+            <input type="text" id="pengeluaranKet" placeholder="Detail pengeluaran" required />
+          </div>
+          <div class="form-group">
+            <label>Anggota</label>
+            <select id="pengeluaranAnggota" required></select>
+          </div>
+          <div class="form-group">
+            <label>Nomor WA Notifikasi (opsional)</label>
+            <input type="text" id="waNumber" placeholder="628xxxxxxxxxx (tanpa +)" />
+            <small>Jika diisi, akan membuka WhatsApp dengan pesan otomatis</small>
+          </div>
+          <button type="submit" class="btn btn-danger">Simpan Pengeluaran + Notif WA</button>
+        </form>
+      </section>
+
+      <!-- RIWAYAT -->
+      <section id="riwayat" class="tab-content">
+        <header class="page-header">
+          <h2>Riwayat Transaksi</h2>
+          <div class="filter-bar">
+            <select id="filterTipe">
+              <option value="semua">Semua</option>
+              <option value="pemasukan">Pemasukan</option>
+              <option value="pengeluaran">Pengeluaran</option>
+            </select>
+            <select id="filterKategori">
+              <option value="semua">Semua Kategori</option>
+              <option value="makan">Makan</option>
+              <option value="wifi">Wifi</option>
+              <option value="beras">Beras</option>
+              <option value="kontrakan">Kontrakan</option>
+              <option value="lainnya">Lainnya</option>
+            </select>
+            <button id="btnClearData" class="btn btn-outline btn-sm">Hapus Semua Data</button>
+          </div>
+        </header>
+        <div id="riwayatList" class="transaction-list full"></div>
+      </section>
+
+      <!-- ANALISIS -->
+      <section id="analisis" class="tab-content">
+        <header class="page-header">
+          <h2>Analisis Keuangan</h2>
+          <p>Ringkasan & insight otomatis</p>
+        </header>
+
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <h3>📊 Ringkasan Bulan Ini</h3>
+            <div id="analisisBulanIni" class="analysis-text"></div>
+          </div>
+          <div class="analysis-card">
+            <h3>📈 Tren Pengeluaran</h3>
+            <canvas id="chartTren"></canvas>
+          </div>
+          <div class="analysis-card full-width">
+            <h3>💡 Insight & Saran</h3>
+            <div id="insightText" class="analysis-text"></div>
+          </div>
+          <div class="analysis-card">
+            <h3>🏆 Pengeluaran per Anggota</h3>
+            <canvas id="chartAnggota"></canvas>
+          </div>
+          <div class="analysis-card">
+            <h3>📅 Pengeluaran Kontrakan (Bulanan)</h3>
+            <div id="kontrakanInfo" class="analysis-text"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANGGOTA -->
+      <section id="anggota" class="tab-content">
+        <header class="page-header">
+          <h2>Daftar Anggota</h2>
+          <p>7 anggota keluarga yang terdaftar</p>
+        </header>
+        <div id="anggotaGrid" class="anggota-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Modal WA Preview -->
+  <div id="waModal" class="modal">
+    <div class="modal-content">
+      <h3>📱 Notifikasi WhatsApp</h3>
+      <pre id="waMessagePreview"></pre>
+      <div class="modal-actions">
+        <button id="btnKirimWA" class="btn btn-primary">Buka WhatsApp</button>
+        <button id="btnTutupWA" class="btn btn-outline">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="kwn.js"></script>
+</body>
+</html>
